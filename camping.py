@@ -4,6 +4,7 @@ import argparse
 import json
 import logging
 import sys
+import re
 from datetime import date, datetime, timedelta
 from dateutil import rrule
 from itertools import count, groupby
@@ -127,6 +128,7 @@ def get_num_available_sites(park_information, start_date, end_date, nights=None)
         LOG.debug('Setting number of nights to {}.'.format(nights))
 
     for site, availabilities in park_information.items():
+        #if re.match("575[5-7]|6471|6468|6469", site) is not None:
         # List of dates that are in the desired range for this site.
         desired_available = []
         for date in availabilities:
@@ -135,7 +137,7 @@ def get_num_available_sites(park_information, start_date, end_date, nights=None)
             desired_available.append(date)
         if desired_available and consecutive_nights(desired_available, nights):
             num_available += 1
-            LOG.debug("Available site {}: {}".format(num_available, site))
+            print("Available site {}: {}".format(num_available, site))
 
     return num_available, maximum
 
