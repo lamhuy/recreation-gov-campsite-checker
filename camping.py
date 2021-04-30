@@ -27,8 +27,8 @@ INPUT_DATE_FORMAT = "%Y-%m-%d"
 ISO_DATE_FORMAT_REQUEST = "%Y-%m-%dT00:00:00.000Z"
 ISO_DATE_FORMAT_RESPONSE = "%Y-%m-%dT00:00:00Z"
 
-SUCCESS_EMOJI = "🏕"
-FAILURE_EMOJI = "❌"
+SUCCESS_EMOJI = "SUCCESS"
+FAILURE_EMOJI = "FAILURE"
 
 headers = {"User-Agent": UserAgent().random}
 
@@ -114,6 +114,11 @@ def get_name_of_site(park_id):
     resp = send_request(url, {})
     return resp["campground"]["facility_name"]
 
+def readFile(fileName):
+    fileObj = open(fileName, "r")  # opens the file in read mode
+    words = fileObj.read().splitlines()  # puts the file into an array
+    fileObj.close()
+    return words
 
 def get_num_available_sites(park_information, start_date, end_date, nights=None):
     maximum = len(park_information)
@@ -126,18 +131,20 @@ def get_num_available_sites(park_information, start_date, end_date, nights=None)
     if nights not in range(1, num_days + 1):
         nights = num_days
         LOG.debug('Setting number of nights to {}.'.format(nights))
-
+    prefersites = readFile("sitesnumber.json")
+    print("Prefer sites {}".format(prefersites))
     for site, availabilities in park_information.items():
-        #if re.match("575[5-7]|6471|6468|6469", site) is not None:
-        # List of dates that are in the desired range for this site.
-        desired_available = []
-        for date in availabilities:
-            if date not in dates:
-                continue
-            desired_available.append(date)
-        if desired_available and consecutive_nights(desired_available, nights):
-            num_available += 1
-            print("Available site {}: {}".format(num_available, site))
+        if site in prefersites:
+        # if re.match("575[5-7]|6471|6468|6469", site) is not None:
+            # List of dates that are in the desired range for this site.
+            desired_available = []
+            for date in availabilities:
+                if date not in dates:
+                    continue
+                desired_available.append(date)
+            if desired_available and consecutive_nights(desired_available, nights):
+                num_available += 1
+                print("Available site {}: {}".format(num_available, site))
 
     return num_available, maximum
 
