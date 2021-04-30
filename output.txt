@@ -1,0 +1,6 @@
+Prefer sites ['5748', '5750', '5751', '5753', '5754', '5755', '5756', '5757', '5758', '5762', '5766', '5767', '5768', '6470', '6471', '6472', '6473', '6474', '6476', '6477', '6478', '6480', '6481', '6482']
+There are no campsites available :(
+FAILURE ASSATEAGUE ISLAND NATIONAL SEASHORE CAMPGROUND (232507): 0 site(s) available out of 106 site(s)
+Prefer sites ['5748', '5750', '5751', '5753', '5754', '5755', '5756', '5757', '5758', '5762', '5766', '5767', '5768', '6470', '6471', '6472', '6473', '6474', '6476', '6477', '6478', '6480', '6481', '6482']
+There are no campsites available :(
+FAILURE ASSATEAGUE ISLAND NATIONAL SEASHORE CAMPGROUND (232507): 0 site(s) available out of 107 site(s)
